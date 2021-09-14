@@ -1,0 +1,23 @@
+import pandas as pd
+df = pd.read_excel('C:/Users/Administrator/Desktop/AAA/B/第3章 线性回归模型/源代码汇总_Jupyter Notebook格式（推荐）/餐饮服务行业收入表.xlsx')
+df.head()
+# 此时的工龄为自变量，薪水为因变量，通过如下代码进行自变量、因变量选取
+X = df[['工龄']]
+Y = df['薪水']
+# 通过如下代码可以将此时的散点图绘制出来：
+from matplotlib import pyplot as plt
+plt.rcParams['font.sans-serif'] = ['SimHei']  # 用来正常显示中文标签
+plt.scatter(X,Y)
+plt.xlabel('工龄')
+plt.ylabel('薪水')
+plt.show()
+from sklearn.linear_model import LinearRegression
+regr = LinearRegression()  # 引入模型
+regr.fit(X,Y)  # 训练模型
+plt.scatter(X,Y)
+plt.plot(X, regr.predict(X), color='red')  # color='red'设置为红色
+plt.xlabel('工龄')
+plt.ylabel('薪水')
+plt.show()
+print('系数a为:' + str(regr.coef_[0]))
+print('截距b为:' + str(regr.intercept_))
